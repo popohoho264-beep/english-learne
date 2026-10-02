@@ -1,0 +1,121 @@
+import { ConversationScenario } from '../types';
+
+export const conversationScenarios: ConversationScenario[] = [
+  {
+    id: 'conv_daily_routine',
+    topic: 'Daily Life',
+    topicAr: 'الحياة اليومية والروتين',
+    level: 'A1',
+    title: 'Morning Routines & Coffee',
+    titleAr: 'روتين الصباح وتناول القهوة',
+    description: 'Practice describing what time you wake up, your breakfast, and how you prepare for the day.',
+    avatar: '☕',
+    initialMessage: "Good morning! I usually wake up at 7 AM and have a cup of coffee. What is your morning routine like?",
+    initialMessageAr: "صباح الخير! أنا عادةً ما أستيقظ في السابعة صباحاً وأتناول فنجان قهوة. كيف يبدو روتينك الصباحي؟",
+    targetVocabulary: ['wake up', 'breakfast', 'usually', 'start', 'coffee']
+  },
+  {
+    id: 'conv_school_learning',
+    topic: 'School & Study',
+    topicAr: 'المدرسة والدراسة',
+    level: 'A1',
+    title: 'Learning English & Subjects',
+    titleAr: 'تعلم الإنجليزية والمواد الدراسية',
+    description: 'Talk about your classes, favorite subjects, and why learning English is important to you.',
+    avatar: '📚',
+    initialMessage: "Hello! I am learning new English words today. What subjects do you enjoy studying the most?",
+    initialMessageAr: "مرحباً! أنا أتعلم كلمات إنجليزية جديدة اليوم. ما هي المواد التي تستمتع بدراستها أكثر شيء؟",
+    targetVocabulary: ['study', 'enjoy', 'subject', 'practice', 'teacher']
+  },
+  {
+    id: 'conv_shopping_market',
+    topic: 'Shopping',
+    topicAr: 'التسوق وشراء الاحتياجات',
+    level: 'A2',
+    title: 'At the Clothes Store',
+    titleAr: 'في متجر الملابس',
+    description: 'Ask for prices, sizes, and colors while shopping for clothes.',
+    avatar: '🛍️',
+    initialMessage: "Welcome to our store! We have great discounts on jackets today. Are you looking for anything in particular?",
+    initialMessageAr: "أهلاً بك في متجرنا! لدينا خصومات رائعة على السترات اليوم. هل تبحث عن شيء محدد؟",
+    targetVocabulary: ['price', 'size', 'color', 'try on', 'expensive', 'discount']
+  },
+  {
+    id: 'conv_travel_airport',
+    topic: 'Travel',
+    topicAr: 'السفر والمطارات',
+    level: 'A2',
+    title: 'Booking a Flight & Vacation',
+    titleAr: 'حجز رحلة طيران والإجازة',
+    description: 'Discuss destinations, flight tickets, packing, and travel experiences.',
+    avatar: '✈️',
+    initialMessage: "I love traveling to new countries! Where are you planning to go for your next vacation?",
+    initialMessageAr: "أنا أحب السفر إلى بلدان جديدة! إلى أين تخطط للذهاب في إجازتك القادمة؟",
+    targetVocabulary: ['travel', 'flight', 'ticket', 'country', 'visit', 'hotel']
+  },
+  {
+    id: 'conv_food_restaurant',
+    topic: 'Food & Dining',
+    topicAr: 'الطعام والمطاعم',
+    level: 'A2',
+    title: 'Ordering at a Restaurant',
+    titleAr: 'الطلب في مطعم',
+    description: 'Practice ordering meals, asking about ingredients, and expressing food preferences.',
+    avatar: '🍽️',
+    initialMessage: "Good evening! Welcome to The Olive Garden. Can I get you something to drink before we look at the main menu?",
+    initialMessageAr: "مساء الخير! أهلاً بك في مطعمنا. هل يمكنني إحضار مشروب لك قبل أن نلقي نظرة على قائمة الطعام الرئيسية؟",
+    targetVocabulary: ['order', 'menu', 'delicious', 'drink', 'water', 'recommend']
+  },
+  {
+    id: 'conv_work_career',
+    topic: 'Work & Career',
+    topicAr: 'العمل والتطوير المهني',
+    level: 'B1',
+    title: 'Project Updates & Teamwork',
+    titleAr: 'تحديثات المشاريع والعمل الجماعي',
+    description: 'Describe your job, manage deadlines, and discuss team collaboration.',
+    avatar: '💼',
+    initialMessage: "Hi there! We are currently planning our quarterly milestones. Could you tell me about a project you are working on?",
+    initialMessageAr: "أهلاً بك! نحن نخطط حالياً لمحطات عملنا الربع سنوية. هل يمكنك إخباري عن مشروع تعمل عليه حالياً؟",
+    targetVocabulary: ['project', 'deadline', 'colleague', 'manage', 'achieve', 'task']
+  },
+  {
+    id: 'conv_hobbies_sports',
+    topic: 'Hobbies & Sports',
+    topicAr: 'الهوايات والرياضة',
+    level: 'B1',
+    title: 'Fitness & Free Time',
+    titleAr: 'اللياقة البدنية وأوقات الفراغ',
+    description: 'Discuss healthy habits, favorite sports, books, and creative hobbies.',
+    avatar: '⚽',
+    initialMessage: "Staying active gives me so much energy during the week! What hobbies or physical activities do you like doing in your free time?",
+    initialMessageAr: "البقاء نشيطاً يمنحني الكثير من الطاقة خلال الأسبوع! ما هي الهوايات أو الأنشطة الرياضية التي تحب ممارستها في وقت فراغك؟",
+    targetVocabulary: ['active', 'exercise', 'habit', 'relax', 'weekend', 'improve']
+  },
+  {
+    id: 'conv_technology_ai',
+    topic: 'Technology & AI',
+    topicAr: 'التكنولوجيا والذكاء الاصطناعي',
+    level: 'B2',
+    title: 'The Future of Artificial Intelligence',
+    titleAr: 'مستقبل الذكاء الاصطناعي وتأثيره',
+    description: 'Debate how modern tech and AI will transform productivity, education, and daily communication.',
+    avatar: '🤖',
+    initialMessage: "Artificial intelligence is evolving at a breathtaking pace. In your opinion, how will AI reshape the way we learn languages and work?",
+    initialMessageAr: "يتطور الذكاء الاصطناعي بسرعة مذهلة. في رأيك، كيف سيعيد تشكيل طريقتنا في تعلم اللغات والعمل؟",
+    targetVocabulary: ['technology', 'perspective', 'innovate', 'impact', 'opportunity', 'transform']
+  },
+  {
+    id: 'conv_business_leadership',
+    topic: 'Leadership & Business',
+    topicAr: 'القيادة والأعمال المتقدمة',
+    level: 'C1',
+    title: 'Executive Strategic Decisions',
+    titleAr: 'القرارات الاستراتيجية التنفيذية',
+    description: 'Articulate complex viewpoints on organizational resilience, ethics, and strategic direction.',
+    avatar: '🏛️',
+    initialMessage: "Effective leadership often requires balancing long-term sustainability with immediate performance demands. How should executives navigate this dilemma?",
+    initialMessageAr: "تتطلب القيادة الفعالة غالباً الموازنة بين الاستدامة طويلة الأجل ومتطلبات الأداء الفوري. كيف يجب على المديرين التنفيذيين التعامل مع هذه المعضلة؟",
+    targetVocabulary: ['strategic', 'dilemma', 'resilience', 'articulate', 'sustainable', 'integrity']
+  }
+];

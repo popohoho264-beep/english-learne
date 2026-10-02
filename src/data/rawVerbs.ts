@@ -1,0 +1,99 @@
+import { WordItem, CEFRLevel } from '../types';
+import { createVerb } from './vocabBase';
+
+interface RawVerbDef {
+  word: string;
+  arabic: string;
+  level: CEFRLevel;
+  past: string;
+  pp: string;
+  s3rd: string;
+  ing: string;
+  category: string;
+  diff: number;
+  pres: string;
+  pastS: string;
+  futS: string;
+  presAr: string;
+  pastAr: string;
+  futAr: string;
+}
+
+const verbDefinitions: RawVerbDef[] = [
+  // A1
+  { word: 'start', arabic: 'يبدأ', level: 'A1', past: 'started', pp: 'started', s3rd: 'starts', ing: 'starting', category: 'Routine', diff: 1, pres: 'I start work at 8 AM.', pastS: 'I started work early today.', futS: 'I will start a new course next week.', presAr: 'أبدأ العمل في الثامنة صباحاً.', pastAr: 'بدأت العمل مبكراً اليوم.', futAr: 'سأبدأ دورة جديدة الأسبوع القادم.' },
+  { word: 'finish', arabic: 'ينهي', level: 'A1', past: 'finished', pp: 'finished', s3rd: 'finishes', ing: 'finishing', category: 'Routine', diff: 1, pres: 'They finish the project today.', pastS: 'They finished their homework.', futS: 'They will finish the report tomorrow.', presAr: 'هم ينهون المشروع اليوم.', pastAr: 'أنهوا واجبهم المنزلي.', futAr: 'سينهون التقرير غداً.' },
+  { word: 'help', arabic: 'يساعد', level: 'A1', past: 'helped', pp: 'helped', s3rd: 'helps', ing: 'helping', category: 'Social', diff: 1, pres: 'I help my family with chores.', pastS: 'I helped an old man cross the street.', futS: 'I will help you with English.', presAr: 'أساعد عائلتي في الأعمال المنزلية.', pastAr: 'ساعدت رجلاً مسناً في عبور الشارع.', futAr: 'سأساعدك في اللغة الإنجليزية.' },
+  { word: 'call', arabic: 'يتصل / ينادي', level: 'A1', past: 'called', pp: 'called', s3rd: 'calls', ing: 'calling', category: 'Communication', diff: 1, pres: 'She calls her mother every day.', pastS: 'She called the doctor yesterday.', futS: 'She will call you back later.', presAr: 'تتصل بوالدتها كل يوم.', pastAr: 'اتصلت بالطبيب بالأمس.', futAr: 'ستعاود الاتصال بك لاحقاً.' },
+  { word: 'ask', arabic: 'يسأل / يطلب', level: 'A1', past: 'asked', pp: 'asked', s3rd: 'asks', ing: 'asking', category: 'Communication', diff: 1, pres: 'Students ask clear questions.', pastS: 'He asked for directions to the station.', futS: 'I will ask the teacher for guidance.', presAr: 'الطلاب يسألون أسئلة واضحة.', pastAr: 'طلب إرشادات للوصول إلى المحطة.', futAr: 'سأسأل المعلم للحصول على التوجيه.' },
+  { word: 'answer', arabic: 'يجيب', level: 'A1', past: 'answered', pp: 'answered', s3rd: 'answers', ing: 'answering', category: 'Communication', diff: 1, pres: 'She answers all client messages.', pastS: 'He answered the phone immediately.', futS: 'I will answer your email soon.', presAr: 'تجيب على جميع رسائل العملاء.', pastAr: 'أجاب على الهاتف فوراً.', futAr: 'سأجيب على بريدك قريباً.' },
+  { word: 'open', arabic: 'يفتح', level: 'A1', past: 'opened', pp: 'opened', s3rd: 'opens', ing: 'opening', category: 'Action', diff: 1, pres: 'The store opens at 9 AM.', pastS: 'He opened the front door.', futS: 'We will open the store soon.', presAr: 'يفتح المتجر في التاسعة صباحاً.', pastAr: 'فتح الباب الأمامي.', futAr: 'سنفتح المتجر قريباً.' },
+  { word: 'close', arabic: 'يغلق', level: 'A1', past: 'closed', pp: 'closed', s3rd: 'closes', ing: 'closing', category: 'Action', diff: 1, pres: 'Banks close at 4 PM.', pastS: 'She closed the window because of rain.', futS: 'They will close the office on Friday.', presAr: 'تغلق البنوك في الرابعة مساءً.', pastAr: 'أغلقت النافذة بسبب المطر.', futAr: 'سيغلقون المكتب يوم الجمعة.' },
+  { word: 'cook', arabic: 'يطبخ / يطهو', level: 'A1', past: 'cooked', pp: 'cooked', s3rd: 'cooks', ing: 'cooking', category: 'Food', diff: 1, pres: 'I cook dinner for my family.', pastS: 'She cooked delicious soup yesterday.', futS: 'We will cook fresh pasta tonight.', presAr: 'أطبخ العشاء لعائلتي.', pastAr: 'طبخت حساءً لذيذاً بالأمس.', futAr: 'سنطبخ معكرونة طازجة الليلة.' },
+  { word: 'clean', arabic: 'ينظف', level: 'A1', past: 'cleaned', pp: 'cleaned', s3rd: 'cleans', ing: 'cleaning', category: 'Home', diff: 1, pres: 'We clean our room every Saturday.', pastS: 'He cleaned his car yesterday morning.', futS: 'I will clean the kitchen later.', presAr: 'ننظف غرفتنا كل سبت.', pastAr: 'نظف سيارته صباح الأمس.', futAr: 'سأنظف المطبخ لاحقاً.' },
+  { word: 'travel', arabic: 'يسافر', level: 'A1', past: 'traveled', pp: 'traveled', s3rd: 'travels', ing: 'traveling', category: 'Travel', diff: 1, pres: 'They travel to Spain every summer.', pastS: 'We traveled by train across Europe.', futS: 'I will travel to London next month.', presAr: 'يسافرون إلى إسبانيا كل صيف.', pastAr: 'سافرنا بالقطار عبر أوروبا.', futAr: 'سأسافر إلى لندن الشهر القادم.' },
+  { word: 'learn', arabic: 'يتعلم', level: 'A1', past: 'learned', pp: 'learned', s3rd: 'learns', ing: 'learning', category: 'Learning', diff: 1, pres: 'I learn new English words every day.', pastS: 'She learned to drive last year.', futS: 'We will learn grammar rules tomorrow.', presAr: 'أتعلم كلمات إنجليزية جديدة كل يوم.', pastAr: 'تعلمت القيادة العام الماضي.', futAr: 'سنتعلم قواعد اللغة غداً.' },
+
+  // A2
+  { word: 'explain', arabic: 'يشرح / يوضح', level: 'A2', past: 'explained', pp: 'explained', s3rd: 'explains', ing: 'explaining', category: 'Communication', diff: 2, pres: 'The teacher explains the lesson clearly.', pastS: 'He explained why he was late.', futS: 'I will explain the plan tomorrow.', presAr: 'يشرح المعلم الدرس بوضوح.', pastAr: 'شرح سبب تأخره.', futAr: 'سأشرح الخطة غداً.' },
+  { word: 'decide', arabic: 'يقرر', level: 'A2', past: 'decided', pp: 'decided', s3rd: 'decides', ing: 'deciding', category: 'Mind', diff: 2, pres: 'We decide things together.', pastS: 'She decided to study medicine.', futS: 'They will decide by Friday.', presAr: 'نقرر الأمور معاً.', pastAr: 'قررت دراسة الطب.', futAr: 'سيقررون بحلول يوم الجمعة.' },
+  { word: 'remember', arabic: 'يتذكر', level: 'A2', past: 'remembered', pp: 'remembered', s3rd: 'remembers', ing: 'remembering', category: 'Mind', diff: 2, pres: 'I remember your phone number.', pastS: 'He remembered to lock the door.', futS: 'You will remember these words with practice.', presAr: 'أتذكر رقم هاتفك.', pastAr: 'تذكر أن يقفل الباب.', futAr: 'ستتذكر هذه الكلمات مع الممارسة.' },
+  { word: 'forget', arabic: 'ينسى', level: 'A2', past: 'forgot', pp: 'forgotten', s3rd: 'forgets', ing: 'forgetting', category: 'Mind', diff: 2, pres: 'People often forget passwords.', pastS: 'I forgot my keys at home.', futS: 'Do not worry, I will not forget.', presAr: 'غالباً ما ينسى الناس كلمات المرور.', pastAr: 'نسيت مفاتيحي في المنزل.', futAr: 'لا تقلق، لن أنسى.' },
+  { word: 'improve', arabic: 'يحسن / يتطور', level: 'A2', past: 'improved', pp: 'improved', s3rd: 'improves', ing: 'improving', category: 'Growth', diff: 2, pres: 'Consistent practice improves your speaking.', pastS: 'His vocabulary improved significantly.', futS: 'Your confidence will improve with time.', presAr: 'الممارسة المنتظمة تحسن تحدثك.', pastAr: 'تحسنت مفرداته بشكل ملحوظ.', futAr: 'ثقتك ستتحسن مع مرور الوقت.' },
+  { word: 'prepare', arabic: 'يجهز / يعد', level: 'A2', past: 'prepared', pp: 'prepared', s3rd: 'prepares', ing: 'preparing', category: 'Routine', diff: 2, pres: 'She prepares healthy meals at home.', pastS: 'We prepared thoroughly for the exam.', futS: 'I will prepare the slides tonight.', presAr: 'تعد وجبات صحية في المنزل.', pastAr: 'استعددنا جيداً للامتحان.', futAr: 'سأجهز الشرائح الليلة.' },
+  { word: 'protect', arabic: 'يحمي', level: 'A2', past: 'protected', pp: 'protected', s3rd: 'protects', ing: 'protecting', category: 'Life', diff: 2, pres: 'Seatbelts protect passengers in cars.', pastS: 'The vaccine protected millions of people.', futS: 'Good software will protect your data.', presAr: 'أحزمة الأمان تحمي الركاب في السيارات.', pastAr: 'حمى اللقاح ملايين الناس.', futAr: 'البرامج الجيدة ستحمي بياناتك.' },
+  { word: 'receive', arabic: 'يستلم / يتلقى', level: 'A2', past: 'received', pp: 'received', s3rd: 'receives', ing: 'receiving', category: 'Communication', diff: 2, pres: 'I receive daily notifications.', pastS: 'She received a letter from abroad.', futS: 'You will receive an email confirmation.', presAr: 'أتلقى إشعارات يومية.', pastAr: 'استلمت رسالة من الخارج.', futAr: 'ستتلقى تأكيداً عبر البريد الإلكتروني.' },
+  { word: 'spend', arabic: 'يقضي (وقتاً) / ينفق (مالاً)', level: 'A2', past: 'spent', pp: 'spent', s3rd: 'spends', ing: 'spending', category: 'Money & Time', diff: 2, pres: 'I spend two hours reading daily.', pastS: 'He spent all his savings on the trip.', futS: 'We will spend the holiday together.', presAr: 'أقضي ساعتين في القراءة يومياً.', pastAr: 'أنفق كل مدخراته على الرحلة.', futAr: 'سنقضي الإجازة معاً.' },
+  { word: 'borrow', arabic: 'يستعير / يستلف', level: 'A2', past: 'borrowed', pp: 'borrowed', s3rd: 'borrows', ing: 'borrowing', category: 'Daily', diff: 2, pres: 'Students borrow books from the library.', pastS: 'I borrowed a pen from my classmate.', futS: 'Can I borrow your laptop tomorrow?', presAr: 'يستعير الطلاب الكتب من المكتبة.', pastAr: 'استعرت قلماً من زميلي في الفصل.', futAr: 'هل يمكنني استعارة حاسوبك غداً؟' },
+
+  // B1
+  { word: 'achieve', arabic: 'يحقق / ينجز', level: 'B1', past: 'achieved', pp: 'achieved', s3rd: 'achieves', ing: 'achieving', category: 'Success', diff: 3, pres: 'Hard workers achieve their goals.', pastS: 'She achieved the highest score in the test.', futS: 'With dedication, you will achieve fluency.', presAr: 'المجتهدون يحققون أهدافهم.', pastAr: 'حققت أعلى درجة في الاختبار.', futAr: 'بالتفاني، ستحقق الطلاقة.' },
+  { word: 'encourage', arabic: 'يشجع', level: 'B1', past: 'encouraged', pp: 'encouraged', s3rd: 'encourages', ing: 'encouraging', category: 'Social', diff: 3, pres: 'Great teachers encourage their students.', pastS: 'My parents encouraged me to pursue my dreams.', futS: 'We will encourage everyone to participate.', presAr: 'المعلمون العظماء يشجعون طلابهم.', pastAr: 'شجعني والداي على ملاحقة أحلامي.', futAr: 'سنشجع الجميع على المشاركة.' },
+  { word: 'manage', arabic: 'يدير / يتمكن من', level: 'B1', past: 'managed', pp: 'managed', s3rd: 'manages', ing: 'managing', category: 'Work', diff: 3, pres: 'She manages a team of designers.', pastS: 'He managed to complete the task on time.', futS: 'I will manage this project efficiently.', presAr: 'تدير فريقاً من المصممين.', pastAr: 'تمكن من إكمال المهمة في الوقت المحدد.', futAr: 'سأدير هذا المشروع بكفاءة.' },
+  { word: 'avoid', arabic: 'يتجنب / يتفادى', level: 'B1', past: 'avoided', pp: 'avoided', s3rd: 'avoids', ing: 'avoiding', category: 'Habits', diff: 3, pres: 'Healthy people avoid excess sugar.', pastS: 'The driver avoided an accident on the highway.', futS: 'You will avoid mistakes by double-checking.', presAr: 'يتجنب الأشخاص الأصحاء السكر الزائد.', pastAr: 'تفادى السائق حادثاً على الطريق السريع.', futAr: 'ستتجنب الأخطاء بمراجعة عملك.' },
+  { word: 'develop', arabic: 'يطور / ينمي', level: 'B1', past: 'developed', pp: 'developed', s3rd: 'develops', ing: 'developing', category: 'Growth', diff: 3, pres: 'Engineers develop modern applications.', pastS: 'The company developed a new algorithm.', futS: 'We will develop strong communication skills.', presAr: 'يطور المهندسون تطبيقات حديثة.', pastAr: 'طورت الشركة خوارزمية جديدة.', futAr: 'سنطور مهارات تواصل قوية.' },
+  { word: 'participate', arabic: 'يشارك / يساهم', level: 'B1', past: 'participated', pp: 'participated', s3rd: 'participates', ing: 'participating', category: 'Social', diff: 3, pres: 'Active citizens participate in debates.', pastS: 'She participated in the international forum.', futS: 'More than fifty teams will participate tomorrow.', presAr: 'المواطنون الفاعلون يشاركون في النقاشات.', pastAr: 'شاركت في المنتدى الدولي.', futAr: 'سيشارك أكثر من خمسين فريقاً غداً.' },
+  { word: 'recommend', arabic: 'يوصي / يرشح', level: 'B1', past: 'recommended', pp: 'recommended', s3rd: 'recommends', ing: 'recommending', category: 'Advice', diff: 3, pres: 'Doctors recommend eight hours of rest.', pastS: 'The librarian recommended an inspiring novel.', futS: 'I will recommend this course to my colleagues.', presAr: 'يوصي الأطباء بثماني ساعات من الراحة.', pastAr: 'رشحت أمينة المكتبة رواية ملهمة.', futAr: 'سأوصي بهذه الدورة لزملائي.' },
+  { word: 'prevent', arabic: 'يمنع / يحول دون', level: 'B1', past: 'prevented', pp: 'prevented', s3rd: 'prevents', ing: 'preventing', category: 'Action', diff: 3, pres: 'Daily hygiene prevents infections.', pastS: 'Quick action prevented major damage.', futS: 'Proper planning will prevent unexpected delays.', presAr: 'النظافة اليومية تمنع العدوى.', pastAr: 'التصرف السريع منع أضراراً جسيمة.', futAr: 'التخطيط السليم سيمنع التأخير غير المتوقع.' },
+
+  // B2
+  { word: 'negotiate', arabic: 'يتفاوض', level: 'B2', past: 'negotiated', pp: 'negotiated', s3rd: 'negotiates', ing: 'negotiating', category: 'Business', diff: 4, pres: 'Diplomats negotiate peaceful treaties.', pastS: 'The union negotiated better working terms.', futS: 'We will negotiate the contract next Tuesday.', presAr: 'يتفاوض الدبلوماسيون على معاهدات سلمية.', pastAr: 'تفاوضت النقابة على شروط عمل أفضل.', futAr: 'سنتفاوض على العقد يوم الثلاثاء القادم.' },
+  { word: 'evaluate', arabic: 'يقيم / يثمن', level: 'B2', past: 'evaluated', pp: 'evaluated', s3rd: 'evaluates', ing: 'evaluating', category: 'Analysis', diff: 4, pres: 'Committees evaluate candidate performance.', pastS: 'Experts evaluated the structural safety.', futS: 'The board will evaluate our results quarterly.', presAr: 'تقيم اللجان أداء المرشحين.', pastAr: 'قيم الخبراء السلامة الإنشائية.', futAr: 'سيقيم مجلس الإدارة نتائجنا فصلياً.' },
+  { word: 'demonstrate', arabic: 'يبرهن / يوضح عملياً', level: 'B2', past: 'demonstrated', pp: 'demonstrated', s3rd: 'demonstrates', ing: 'demonstrating', category: 'Science', diff: 4, pres: 'Experiments demonstrate physical laws.', pastS: 'The scientist demonstrated the new device.', futS: 'The pilot will demonstrate the flight simulator.', presAr: 'التجارب تبرهن القوانين الفيزيائية.', pastAr: 'أوضح العالم الجهاز الجديد عملياً.', futAr: 'سيقوم الطيار بتوضيح جهاز المحاكاة.' },
+  { word: 'maintain', arabic: 'يحافظ على / يصون', level: 'B2', past: 'maintained', pp: 'maintained', s3rd: 'maintains', ing: 'maintaining', category: 'Work', diff: 4, pres: 'Professionals maintain high standards.', pastS: 'He maintained his composure during the crisis.', futS: 'We will maintain regular updates.', presAr: 'يحافظ المحترفون على معايير رفيعة.', pastAr: 'حافظ على هدوئه أثناء الأزمة.', futAr: 'سنحافظ على التحديثات المنتظمة.' },
+  { word: 'distinguish', arabic: 'يميز بين / يفرق', level: 'B2', past: 'distinguished', pp: 'distinguished', s3rd: 'distinguishes', ing: 'distinguishing', category: 'Mind', diff: 4, pres: 'Keen observers distinguish fact from rumor.', pastS: 'The study distinguished between two symptoms.', futS: 'You will distinguish subtle accents in English.', presAr: 'يميز المراقبون الأذكياء الحقيقة من الإشاعة.', pastAr: 'فرقت الدراسة بين عرضين.', futAr: 'ستُميز اللهجات الدقيقة في الإنجليزية.' },
+  { word: 'facilitate', arabic: 'يسهل / ييسر', level: 'B2', past: 'facilitated', pp: 'facilitated', s3rd: 'facilitates', ing: 'facilitating', category: 'Process', diff: 4, pres: 'Digital tools facilitate remote teamwork.', pastS: 'The moderator facilitated the discussion.', futS: 'This platform will facilitate English fluency.', presAr: 'الأدوات الرقمية تيسر العمل الجماعي عن بعد.', pastAr: 'يسر مدير الحوار النقاش.', futAr: 'ستيسر هذه المنصة طلاقة اللغة الإنجليزية.' },
+
+  // C1
+  { word: 'articulate', arabic: 'يعبر بوضوح / يفصح', level: 'C1', past: 'articulated', pp: 'articulated', s3rd: 'articulates', ing: 'articulating', category: 'Fluency', diff: 5, pres: 'Eloquent leaders articulate complex concepts.', pastS: 'She articulated her vision persuasively.', futS: 'You will articulate sophisticated ideas naturally.', presAr: 'القادة الفصحاء يعبرون عن المفاهيم المعقدة بوضوح.', pastAr: 'أفصحت عن رؤيتها بشكل مقنع.', futAr: 'ستعبر عن أفكار راقية بكل سلاسة.' },
+  { word: 'scrutinize', arabic: 'يدقق فحصاً / يمعن النظر', level: 'C1', past: 'scrutinized', pp: 'scrutinized', s3rd: 'scrutinizes', ing: 'scrutinizing', category: 'Analysis', diff: 5, pres: 'Auditors scrutinize financial records.', pastS: 'Lawyers scrutinized the contractual clauses.', futS: 'Regulators will scrutinize the merger details.', presAr: 'يدقق المراجعون في السجلات المالية.', pastAr: 'دقق المحامون في بنود العقد.', futAr: 'سيدقق المنظمون في تفاصيل الاندماج.' },
+  { word: 'corroborate', arabic: 'يعزز بالأدلة / يؤكد', level: 'C1', past: 'corroborated', pp: 'corroborated', s3rd: 'corroborates', ing: 'corroborating', category: 'Evidence', diff: 5, pres: 'Empirical data corroborates this hypothesis.', pastS: 'Witnesses corroborated his testimony.', futS: 'Subsequent findings will corroborate our study.', presAr: 'البيانات التجريبية تعزز هذه الفرضية بالأدلة.', pastAr: 'أكد الشهود إفادته.', futAr: 'ستؤكد الاكتشافات اللاحقة دراستنا.' },
+  { word: 'reconcile', arabic: 'يوفق بين / يصلح', level: 'C1', past: 'reconciled', pp: 'reconciled', s3rd: 'reconciles', ing: 'reconciling', category: 'Resolution', diff: 5, pres: 'Mediators reconcile divergent viewpoints.', pastS: 'They reconciled their commercial disputes.', futS: 'The committee will reconcile both proposals.', presAr: 'يوفق الوسطاء بين وجهات النظر المتباينة.', pastAr: 'أصلحوا نزاعاتهم التجارية.', futAr: 'ستوفق اللجنة بين المقترحين.' },
+
+  // C2 & PRO
+  { word: 'epitomize', arabic: 'يجسد النموذج الأسمى لـ', level: 'C2', past: 'epitomized', pp: 'epitomized', s3rd: 'epitomizes', ing: 'epitomizing', category: 'Advanced', diff: 5, pres: 'His relentless discipline epitomizes mastery.', pastS: 'The renaissance artwork epitomized humanism.', futS: 'This achievement will epitomize excellence.', presAr: 'انضباطه الصارم يجسد قمة الإتقان.', pastAr: 'جسد العمل الفني في عصر النهضة الإنسانية.', futAr: 'سيجسد هذا الإنجاز أسمى معاني التميز.' },
+  { word: 'substantiate', arabic: 'يثبت بالحجة والبرهان', level: 'C2', past: 'substantiated', pp: 'substantiated', s3rd: 'substantiates', ing: 'substantiating', category: 'Academic', diff: 5, pres: 'Scholars substantiate claims with citations.', pastS: 'The investigator substantiated the allegation.', futS: 'Rigorous peer review will substantiate the paper.', presAr: 'يثبت العلماء الادعاءات بالاقتباسات الدقيقة.', pastAr: 'أثبت المحقق الادعاء بالبرهان.', futAr: 'المراجعة المحكمة ستثبت البحث بالأدلة.' },
+  { word: 'promulgate', arabic: 'ينشر رسمياً / يذيع', level: 'PRO', past: 'promulgated', pp: 'promulgated', s3rd: 'promulgates', ing: 'promulgating', category: 'Legal & Pro', diff: 5, pres: 'Governments promulgate constitutional reforms.', pastS: 'The regulatory agency promulgated safety guidelines.', futS: 'The council will promulgate the resolution tomorrow.', presAr: 'تذيع الحكومات وتعلن الإصلاحات الدستورية رسمياً.', pastAr: 'أصدرت الهيئة التنظيمية إرشادات السلامة.', futAr: 'سيصدر المجلس القرار رسمياً غداً.' },
+  { word: 'juxtapose', arabic: 'يقارن بوضع الشيئين متجاورين', level: 'PRO', past: 'juxtaposed', pp: 'juxtaposed', s3rd: 'juxtaposes', ing: 'juxtaposing', category: 'Literature & Pro', diff: 5, pres: 'Authors juxtapose darkness with enlightenment.', pastS: 'The curator juxtaposed classical and modern sculptures.', futS: 'Our analysis will juxtapose both economic theories.', presAr: 'يقارن المؤلفون بوضع الظلام والنور جنباً إلى جنب.', pastAr: 'جاور القيم بين التماثيل الكلاسيكية والحديثة للمقارنة.', futAr: 'تحليلنا سيقارن بين النظريتين الاقتصاديتين.' }
+];
+
+export const curatedVerbs: WordItem[] = verbDefinitions.map((d, index) =>
+  createVerb(
+    `v_${d.word}`,
+    d.word,
+    d.arabic,
+    d.level,
+    { past: d.past, pastParticiple: d.pp, thirdPerson: d.s3rd, continuous: d.ing },
+    {
+      present: d.pres,
+      past: d.pastS,
+      future: d.futS,
+      presentAr: d.presAr,
+      pastAr: d.pastAr,
+      futureAr: d.futAr,
+    },
+    d.category,
+    d.diff,
+    index < 20 ? 'Essential' : 'High'
+  )
+);

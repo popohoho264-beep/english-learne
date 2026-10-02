@@ -1,0 +1,6 @@
+{
+  "name": "FluentPulse - English Fluency Mastery (A1 to Pro)",
+  "description": "Complete interactive English learning platform with 1000+ verbs and nouns, CEFR levels A1-Pro, Arabic guidance, sentence building, verb tenses, and smart repetition.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
